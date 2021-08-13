@@ -149,6 +149,7 @@ public class SH_Player1 : MonoBehaviour
     {
         if (carryBulletCount > 0)
         {
+            animator.SetTrigger("Reload");
             isReload = true;
             //currentGun.anim.SetTrigger("Reload"); // 리로드 모션 애니매이션
             carryBulletCount += currentBulletCount;
