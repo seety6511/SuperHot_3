@@ -6,14 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class JH_GameOver : MonoBehaviour
 {
-    //현재 Stage 
-    public Text currStageUI;
-    //현재 Score 
-    public Text ScoreUI;
-    //ReStartButton
-    public Button retryBtn;
-    //Home Button
-    public Button HomeBtn;
     public GameObject image;
     public GameObject blood1;
     public GameObject blood2;

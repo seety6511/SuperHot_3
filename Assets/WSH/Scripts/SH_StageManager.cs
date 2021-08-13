@@ -17,6 +17,7 @@ public class SH_StageManager : MonoBehaviour
     public SH_Panel_GameClear gameClearUI;
     public SH_Panel_StageClear stageClearUI;
     public SH_Panel_GameOver gameOverUI;
+    public SH_UI_PauseMenu pauseMenu;
     public SH_Player player;
 
     public List<Transform> spawnPointList = new List<Transform>();
@@ -35,6 +36,13 @@ public class SH_StageManager : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            inputWaiting = true;
+            pauseMenu.gameObject.SetActive(true);
+            return;
+        }
+
         if (inputWaiting)
         {
             return;
@@ -103,10 +111,8 @@ public class SH_StageManager : MonoBehaviour
         currentStage.gameObject.SetActive(false);
         currentStage.gameObject.SetActive(true);
 
-        Debug.Log("Player Respawn Pos : " + currentStage.stageStartPos);
-        Debug.Log("Player Respawn Rot : " + currentStage.stageStartRotate);
-
-        //SH_BulletFactory.Instance.Init();
+        //Debug.Log("Player Respawn Pos : " + currentStage.stageStartPos);
+        //Debug.Log("Player Respawn Rot : " + currentStage.stageStartRotate);
     }
 
     void GameOver()
@@ -125,8 +131,7 @@ public class SH_StageManager : MonoBehaviour
     {
         gameClear = true;
         inputWaiting = true;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        MouseFree();
         gameClearUI.gameObject.SetActive(true);
     }
 
@@ -135,16 +140,26 @@ public class SH_StageManager : MonoBehaviour
         SH_TimeScaler.ReplayTime();
         inputWaiting = false;
         infinityMode = true;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        MouseLock();
         gameClearUI.gameObject.SetActive(false);
     }
 
     public void Home()
     {
         SH_TimeScaler.ReplayTime();
+        MouseFree();
+        SceneManager.LoadScene("StartScene");
+    }
+
+    public void MouseFree()
+    {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        SceneManager.LoadScene("StartScene");
+    }
+
+    public void MouseLock()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

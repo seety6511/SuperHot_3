@@ -38,6 +38,7 @@ public class SH_Stage : MonoBehaviour
     public Quaternion stageStartRotate;
     public SH_StageManager sm;
     bool posSave;
+    public int aliveEnemy;
 
     private void Start()
     {
@@ -51,7 +52,7 @@ public class SH_Stage : MonoBehaviour
     void OnEnable()
     {
         player = FindObjectOfType<SH_Player>();
-
+        aliveEnemy = spawnDatas.Count;
         allSpawn = false;
         stageClear = false;
         currentSpawnDataIndex = 0;

@@ -22,8 +22,6 @@ public class SH_Player1 : MonoBehaviour
     public float fireRate; // 연사속도
     public int reloadBulletCount; //총알 재장전 개수
     public int currentBulletCount; //현재 탄알집에 남아 있는 총알의 개수
-    public int maxBulletCount;  //최대 소유 가능 총알 개수.
-    public int carryBulletCount; //현재 소유하고 있는 총알 개수
     public float reloadTime; //재장전 속도
 
     float currentFireRate;
@@ -75,7 +73,6 @@ public class SH_Player1 : MonoBehaviour
         if (isDead)
             return;
 
-
         GunefireRateCalc();
         TryFire();
         TryReload();
@@ -97,13 +94,15 @@ public class SH_Player1 : MonoBehaviour
 
     void GunefireRateCalc()
     {
-        if (currentFireRate > 0) currentFireRate -= Time.deltaTime; //1초에 1감소
+        //if (currentFireRate > 0) currentFireRate -= Time.deltaTime; //1초에 1감소
+        if (currentFireRate > 0) currentFireRate -= SH_TimeScaler.deltaTime; //1초에 1감소
         //0이되면 깍이지 않음
-
     }
 
     Ray ray;
     Vector3 crossPoint;
+    private int carryBulletCount;
+
     void TryFire()
     {
         ray = Camera.main.ScreenPointToRay(crossHeadPoint);
@@ -124,10 +123,7 @@ public class SH_Player1 : MonoBehaviour
             Fire();
         }
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawRay(firePos.position, ray.direction*Mathf.Infinity);
-    }
+
     void Fire()
     {
         if (!isReload)
@@ -151,7 +147,6 @@ public class SH_Player1 : MonoBehaviour
         {
             animator.SetTrigger("Reload");
             isReload = true;
-            //currentGun.anim.SetTrigger("Reload"); // 리로드 모션 애니매이션
             carryBulletCount += currentBulletCount;
             currentBulletCount = 0;
 
@@ -180,8 +175,6 @@ public class SH_Player1 : MonoBehaviour
         {
             StartCoroutine(Reloadcoroutine());
         }
-
-
     }
 
     public void Hit(GameObject shooter)
@@ -198,7 +191,6 @@ public class SH_Player1 : MonoBehaviour
         audioSource.PlayOneShot(SH_SoundContainer.Instance.entityHitSound);
         audioSource.PlayOneShot(SH_SoundContainer.Instance.playerDeadBGM);
     }
-
     void Die()
     {
     }

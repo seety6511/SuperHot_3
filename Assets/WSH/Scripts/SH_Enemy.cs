@@ -168,6 +168,7 @@ public class SH_Enemy : MonoBehaviour
     }
     void Die()
     {
+        FindObjectOfType<SH_StageManager>().currentStage.aliveEnemy--;
         Destroy(gameObject, 2f);
     }
 
@@ -210,6 +211,10 @@ public class SH_Enemy : MonoBehaviour
         SH_BulletFactory.Instance.BulletPull(target.GetRandomTargetPart().gameObject, shootPos);
         shootPos.gameObject.GetComponent<AudioSource>().PlayOneShot(SH_SoundContainer.Instance.shotSound);
         isAiming = false;
+    }
+
+    void ShootEnd()
+    {
     }
     //플레이어가 공격 범위 내에 들었는지 체크한다
     bool RangeCheck
