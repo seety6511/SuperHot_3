@@ -155,12 +155,16 @@ public class SH_Player : MonoBehaviour
     }
     void Reload()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !isReload)
+        if (Input.GetKeyDown(KeyCode.R) && !isReload   )
         {
             animator.SetTrigger("Reload");
             isReload = true;
             currentBulletCount = 6;
         }
+    }
+    public GameObject GetGun()
+    {
+        return weapon;
     }
     public void Hit()
     {
