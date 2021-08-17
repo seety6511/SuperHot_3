@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2970739444413534298}
-  - component: {fileID: 7738492981213592554}
   - component: {fileID: 571885256881664275}
+  - component: {fileID: 7738492981213592554}
   - component: {fileID: 6217123432932871576}
   m_Layer: 6
   m_Name: SH_Bullet
@@ -35,6 +35,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &571885256881664275
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015238100418244480}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 4
+  m_Direction: 2
+  m_Center: {x: 0.000000074505806, y: 0.0106449425, z: 0.18592015}
 --- !u!54 &7738492981213592554
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -47,24 +61,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!136 &571885256881664275
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015238100418244480}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2.6312373
-  m_Direction: 2
-  m_Center: {x: 0.000000074505806, y: 0.0106449425, z: 0.18592015}
+  m_CollisionDetection: 3
 --- !u!114 &6217123432932871576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,14 +77,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a056b9ca97db1a749a66b78ed490965e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shooter: {fileID: 0}
   target: {fileID: 0}
   entityHitEffect: {fileID: 119212, guid: 67a02ea392505844bab240611d904cc0, type: 3}
   wallHitEffect: {fileID: 195742, guid: c83fb3ef04bb383408bb2064b89690b2, type: 3}
-  speed: 48
+  speed: 24
   maxRange: 128
   dir: {x: 0, y: 0, z: 0}
   startPos: {x: 0, y: 0, z: 0}
+  frontHitTag: 
+  backHitTag: 
 --- !u!1 &6419554320450811309
 GameObject:
   m_ObjectHideFlags: 0

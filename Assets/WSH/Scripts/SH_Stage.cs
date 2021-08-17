@@ -75,8 +75,6 @@ public class SH_Stage : MonoBehaviour
             posSave = true;
         }
 
-        Debug.Log("Save Pos : " + stageStartPos);
-        Debug.Log("Save Rot : " + stageStartRotate);
     }
 
     private void Update()

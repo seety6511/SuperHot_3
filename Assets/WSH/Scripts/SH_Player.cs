@@ -22,6 +22,7 @@ public class SH_Player : MonoBehaviour
     public int currentBulletCount; //현재 탄알집에 남아 있는 총알의 개수
     public bool rebound;
     public bool isReload = false;
+    public JH_HUD magazineHUD;
 
     public Camera cam;
     public Animator animator;
@@ -52,6 +53,8 @@ public class SH_Player : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
+
         stageManager = FindObjectOfType<SH_StageManager>();
         Init();
     }
@@ -60,16 +63,18 @@ public class SH_Player : MonoBehaviour
         audioSource.Stop();
         isDead = false;
         animator.SetLayerWeight(1, 1f);
-        animator.SetBool("Revive",true);
+        animator.SetBool("Revive", true);
         currentBulletCount = reloadBulletCount;
         rebound = false;
         isReload = false;
+        magazineHUD.CheckBullet();
         pm.Init();
         crossHeadPoint = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
         crossHead.transform.position = crossHeadPoint;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
+
     void Update()
     {
         if (isDead)
@@ -98,7 +103,7 @@ public class SH_Player : MonoBehaviour
         ray = Camera.main.ScreenPointToRay(crossHeadPoint);
         RaycastHit hit;
 
-        if (Physics.Raycast(firePos.position, ray.direction, out hit,Mathf.Infinity,1<<0))
+        if (Physics.Raycast(firePos.position, ray.direction, out hit, Mathf.Infinity, 1 << 0))
         {
             if (hit.point != crossPoint)
                 crossPoint = hit.point;
@@ -132,43 +137,38 @@ public class SH_Player : MonoBehaviour
         }
     }
 
-    void ShootEnd()
+    private void OnTriggerEnter(Collider other)
     {
-        rebound = false;
+        if(other.CompareTag("Bullet"))
+        Debug.Log("A");
     }
 
-    void Aim() { }
-    
-    void Shoot()
-    {
-        currentBulletCount--;
-        fire = false;
-    }
     private void OnDrawGizmos()
     {
-        Gizmos.DrawRay(firePos.position, ray.direction*Mathf.Infinity);
+        Gizmos.DrawRay(firePos.position, ray.direction * Mathf.Infinity);
     }
-    void ReloadEnd()
-    {
-        currentBulletCount = reloadBulletCount;
-        isReload = false;
-    }
+
+    #region Animation Methods
     void Reload()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !isReload   )
+        if (Input.GetKeyDown(KeyCode.R) && !isReload)
         {
             animator.SetTrigger("Reload");
             isReload = true;
             currentBulletCount = 6;
         }
     }
-    public GameObject GetGun()
+
+    void ReloadEnd()
     {
-        return weapon;
+        currentBulletCount = reloadBulletCount;
+        isReload = false;
+        magazineHUD.CheckBullet();
     }
+
     public void Hit()
     {
-        if (overpower|| isDead)
+        if (overpower || isDead)
             return;
 
         animator.SetBool("Revive", false);
@@ -180,8 +180,21 @@ public class SH_Player : MonoBehaviour
         audioSource.PlayOneShot(SH_SoundContainer.Instance.entityHitSound);
         audioSource.PlayOneShot(SH_SoundContainer.Instance.playerDeadBGM);
     }
+    void ShootEnd()
+    {
+        print("Shoot End");
+        rebound = false;
+    }
+    void Aim() { }
+    void Shoot()
+    {
+        currentBulletCount--;
+        fire = false;
+        magazineHUD.CheckBullet();
+    }
 
     void Die()
     {
     }
+    #endregion
 }

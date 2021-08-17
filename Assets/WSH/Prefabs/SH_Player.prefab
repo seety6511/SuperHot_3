@@ -546,9 +546,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2195813225409474130}
   - component: {fileID: 2195813225409474131}
+  - component: {fileID: 8378357615565970408}
   - component: {fileID: 6998076196739900723}
   - component: {fileID: 4631761184466460457}
-  - component: {fileID: 2762269374682872662}
   - component: {fileID: 1274885425460414160}
   - component: {fileID: 3463092262912778393}
   - component: {fileID: 8794856457689205628}
@@ -596,6 +596,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &8378357615565970408
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2195813225409474124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.8859409, z: 1}
+  m_Center: {x: 0, y: 1.0729463, z: 0}
 --- !u!195 &6998076196739900723
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -641,31 +654,17 @@ MonoBehaviour:
   firePos: {fileID: 5069951710955865925}
   crossHead: {fileID: 0}
   crossHeadPoint: {x: 0, y: 0, z: 0}
-  fireRate: 0.2
   reloadBulletCount: 6
   currentBulletCount: 6
-  reloadTime: 1
   rebound: 0
+  isReload: 0
+  magazineHUD: {fileID: 0}
   cam: {fileID: 0}
   animator: {fileID: 2195813225409474131}
   deadCamPos: {fileID: 1866197987392230767}
   audioSource: {fileID: 8794856457689205628}
   stageManager: {fileID: 0}
   pm: {fileID: 3463092262912778393}
---- !u!136 &2762269374682872662
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2195813225409474124}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.267425
-  m_Height: 1.8840309
-  m_Direction: 1
-  m_Center: {x: -0.004283011, y: 0.9230141, z: 0}
 --- !u!54 &1274885425460414160
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -677,11 +676,11 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!114 &3463092262912778393
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -111,6 +111,7 @@ public class SH_StageManager : MonoBehaviour
         currentStage.gameObject.SetActive(false);
         currentStage.gameObject.SetActive(true);
 
+        SH_BulletFactory.Instance.ResetPool();
         //Debug.Log("Player Respawn Pos : " + currentStage.stageStartPos);
         //Debug.Log("Player Respawn Rot : " + currentStage.stageStartRotate);
     }

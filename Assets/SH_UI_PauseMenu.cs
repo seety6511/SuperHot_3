@@ -13,24 +13,32 @@ public class SH_UI_PauseMenu : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        SH_TimeScaler.StopTime();
+        StartCoroutine("co");
+    }
+
+    IEnumerator co()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Time.timeScale = 0f;
+        //SH_TimeScaler.StopTime();
     }
 
     public void ResumeButton()
     {
+        Time.timeScale =1f;
+        //SH_TimeScaler.ReplayTime();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         FindObjectOfType<SH_StageManager>().inputWaiting = false;
-        SH_TimeScaler.ReplayTime();
         gameObject.SetActive(false);
     }
 
     public void HomeButton()
     {
+        Time.timeScale = 1f;
+        //SH_TimeScaler.ReplayTime();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        SH_TimeScaler.ReplayTime();
         SceneManager.LoadScene("StartScene");
     }
-
 }

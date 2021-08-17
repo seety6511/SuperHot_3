@@ -11,6 +11,7 @@ public class SH_TimeScaler : MonoBehaviour
 
     static float timeScale;
     public AudioSource audioSource;
+    public SH_Player player;
     public static float TimeScale
     {
         get
@@ -44,19 +45,23 @@ public class SH_TimeScaler : MonoBehaviour
         {
             audioSource.Stop();
             scaleOn = false;
+            player.rebound = false;
+            player.isReload = false;
         }
 
         deltaTime = Time.deltaTime * TimeScale;
     }
 
+    static float prevTimeScale;
     public static void StopTime()
     {
         scaleOn = true;
+        //prevTimeScale = timeScale;
         //timeScale = 0f;
     }
     public static void ReplayTime()
     {
         scaleOn = false;
-        //timeScale = originScale;
+        //timeScale = prevTimeScale;
     }
 }

@@ -30,6 +30,26 @@ public class SH_BulletFactory : MonoBehaviour
             t.SetActive(false);
         }
     }
+
+    public void ResetPool()
+    {
+        //if (usedBulletPool.Count != 0)
+        //{
+        //    foreach (var b in usedBulletPool)
+        //    {
+        //        b.SetActive(false);
+        //    }
+        //}
+
+        //if (usedTrailPool.Count != 0)
+        //{
+        //    foreach (var t in usedTrailPool)
+        //    {
+        //        t.SetActive(false);
+        //    }
+        //}
+        
+    }
     
     public void PushTrail(GameObject trail)
     {
